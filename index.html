@@ -17,7 +17,7 @@
     <link rel="manifest" href="site.webmanifest" />
     <link rel="apple-touch-icon" href="icon.png" />
     <!-- Place favicon.ico in the root directory -->
-
+    <link rel="shortcut icon" href="bru-favicon.png" type="image/png" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -34,6 +34,7 @@
   <body>
     <!-- Add your site or application content here -->
     <p>This is HTML5 Boilerplate.</p>
+    <input type="text" name="inpTest" id="inpTest" style="padding: 10px;" minlength="4" maxlength="10" value="100.000">
 
     <main role="main" class="container">
       <section>
@@ -53,19 +54,24 @@
                 <div class="d-flex align-items-start" id="inpAmount">
                   <span class="amount__icon">$</span>
                   <input
-                  type="number"
-                  name="amount"
-                  id="amount"
-                  class="amount__inp"
-                  value="100000"
-                /></div>
-                
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    class="amount__inp"
+                    value="100000"
+                  />
+                </div>
+
                 <div
                   class="bru__minmax d-flex justify-content-between"
                   id="amountMinMax"
                 >
-                  <small id="amountMin">Monto minimo: $1.000<span></span></small>
-                  <small id="amountMax">Monto maximo: $10.000.000<span></span></small>
+                  <small id="amountMin"
+                    >Monto minimo: $1.000<span></span
+                  ></small>
+                  <small id="amountMax"
+                    >Monto maximo: $10.000.000<span></span
+                  ></small>
                 </div>
               </div>
 
@@ -95,22 +101,28 @@
 
             <div class="results__content">
               <div class="result__item">
-                <p>Monto inicial: </p><span id="montoInicial"></span>
+                <p>Monto inicial:</p>
+                <span id="montoInicial"></span>
               </div>
               <div class="result__item">
-                <p>Intereses ganados: </p><span id="interesesGanados"></span>
+                <p>Intereses ganados:</p>
+                <span id="interesesGanados"></span>
               </div>
               <div class="result__item">
-                <p>Neto a cobrar: </p><span id="netoACobrar"></span>
+                <p>Neto a cobrar:</p>
+                <span id="netoACobrar"></span>
               </div>
               <div class="result__item">
-                <p>Período de renovación: </p><span id="periodoRenovacion"></span>
+                <p>Período de renovación:</p>
+                <span id="periodoRenovacion"></span>
               </div>
               <div class="result__item">
-                <p>Tasa Nominal Anual (TNA): </p><span id="tasaNominalAnual"></span>
+                <p>Tasa Nominal Anual (TNA):</p>
+                <span id="tasaNominalAnual"></span>
               </div>
               <div class="result__item">
-                <p>Tasa Efectiva Anual (TEA): </p><span id="tasaEfectivaAnual"></span>
+                <p>Tasa Efectiva Anual (TEA):</p>
+                <span id="tasaEfectivaAnual"></span>
               </div>
             </div>
           </div>
@@ -119,6 +131,10 @@
       </section>
     </main>
 
+    <div class="screen__loading">
+      <span class="animated-words" data-text="brubank">brubank</span>
+      <span class="animated-words" data-text="simulator">simulator</span>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>
     <script src="js/plugins.js"></script>

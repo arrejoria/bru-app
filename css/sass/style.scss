@@ -74,6 +74,8 @@
   --font-family-body: "Inter", sans-serif;
 
   --field-padding: 10px;
+  --load-words: 0%;
+  --scren-time: 0s;
 }
 body {
   padding: 0;
@@ -166,5 +168,81 @@ body {
 
   .result__item:nth-child(2n + 1) {
     background-color: #f5f5f6;
+  }
+}
+
+.screen__loading {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #FFF;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+
+}
+.animated-words {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  color: rgb(97, 74, 217, 0.2);
+  font-size: 4em;
+  font-family: 'Poppins';
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.animated-words:first-child {
+  left: 50%;
+  top: 50%;
+}
+.animated-words:last-child {
+  left: 50%;
+  top: 60%;
+}
+.animated-words::before {
+  top: 0;
+  left: 0;
+  width: 0;
+  color: #614ad9;
+  overflow: hidden;
+  position: absolute;
+  content: attr(data-text);
+  transition: all var(--scren-time);
+}
+.animated-words::before{
+  width: var(--load-words);
+}
+
+.screen-text-animation {
+  // transition: font-size 1s ease-in-out;
+  animation: textBounce 1s ease-out;
+}
+
+.screen-animation{
+  animation: screenClose 1s ease-out;
+}
+
+@keyframes textBounce {
+  0% {
+    font-size: 4em;
+  }
+  50%{
+    font-size: 5em;
+  }
+  100%{
+    font-size: 4em;
+  }
+}
+
+@keyframes screenClose {
+  from {
+    clip-path: circle(100%);
+  }
+  to {
+    clip-path: circle(0%);
   }
 }
