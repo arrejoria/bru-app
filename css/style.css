@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@500&display=swap");
+:root {
+  --text-size-xs: 0.75rem;
+  --text-lh-xs: 18px;
+  --text-size-s: 0.875rem;
+  --text-lh-s: 20px;
+  --text-size-m: 1rem;
+  --text-lh-m: 24px;
+  --text-size-l: 1.15rem;
+  --text-lh-l: 28px;
+  --text-size-xl: 1.5rem;
+  --text-lh-xl: 36px;
+  --body-color: #677788;
+  --heading-color: #111;
+  --color-primary: #377dff;
+  --color-primary-hover: #1164ff;
+  --border-color: #c5d2da;
+  --background-light: #f7faff;
+  --background-dark: #21325b;
+  --background-soft-primary: rgba(55, 125, 255, 0.1);
+  --background-offers: #fff8eb;
+  --color-body: #677788;
+  --color-warning: #ec9a3c;
+  --color-warning-hover: #ec9a3c26;
+  --color-success: #00c9a7;
+  --color-offers: #ffb937;
+  --color-primary-100: #d7eaff;
+  --color-primary-200: #afd3ff;
+  --color-primary-300: #86b9ff;
+  --color-primary-400: #69a2ff;
+  --color-primary-500: #377dff;
+  --color-primary-600: #2860db;
+  --color-primary-700: #1b47b7;
+  --color-primary-800: #113193;
+  --color-primary-900: #0a217a;
+  --color-success-100: #e8fcd8;
+  --color-success-200: #ccf9b3;
+  --color-success-300: #a5ee8a;
+  --color-success-400: #80de69;
+  --color-success-500: #4cc93c;
+  --color-success-600: #30ac2b;
+  --color-success-700: #1e9023;
+  --color-success-800: #13741f;
+  --color-success-900: #0b601d;
+  --color-info-100: #d9f7fe;
+  --color-info-200: #b4ecfe;
+  --color-info-300: #8edcfe;
+  --color-info-400: #72cbfd;
+  --color-info-500: #44affc;
+  --color-info-600: #3189d8;
+  --color-info-700: #2267b5;
+  --color-info-800: #154892;
+  --color-info-900: #0d3378;
+  --color-warning-100: #fff8d9;
+  --color-warning-200: #fff0b3;
+  --color-warning-300: #ffe58d;
+  --color-warning-400: #ffda71;
+  --color-warning-500: #ffc942;
+  --color-warning-600: #dba530;
+  --color-warning-700: #b78321;
+  --color-warning-800: #936415;
+  --color-warning-900: #7a4e0c;
+  --color-danger-100: #ffe7d8;
+  --color-danger-200: #ffcab2;
+  --color-danger-300: #ffa68b;
+  --color-danger-400: #ff846f;
+  --color-danger-500: #ff4c3f;
+  --color-danger-600: #db2e30;
+  --color-danger-700: #b71f2e;
+  --color-danger-800: #93142b;
+  --color-danger-900: #7a0c29;
+  --font-family-heading: "Inter", sans-serif;
+  --font-family-body: "Inter", sans-serif;
+  --field-padding: 10px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.bru__container {
+  display: block;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-family: "Poppins";
+  padding: 20px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.bru__fields {
+  display: flex;
+  flex-direction: column;
+}
+.bru__fields label {
+  padding: 5px;
+}
+.bru__fields input,
+.bru__fields select {
+  padding: var(--field-padding);
+  outline: none;
+  border-radius: 5px;
+  border: 1px #ccc solid;
+  width: 100%;
+}
+.bru__fields input {
+  border-radius: 0 5px 5px 0;
+}
+.bru__fields select option:first-child {
+  color: #ccc;
+}
+.bru__fields #inpAmount .amount__icon {
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: 15px 0 0 15px;
+  padding: calc(var(--field-padding) - 3px);
+  padding-inline: 20px;
+  text-align: center;
+}
+.bru__fields .bru__minmax {
+  margin: 10px;
+}
+
+.separator {
+  background-color: #ccc;
+  margin: 15px 0;
+  width: 100%;
+  height: 1px;
+}
+
+.results__content .result__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.results__content .result__item #netoACobrar {
+  color: #1e9023;
+}
+.results__content .result__item p {
+  margin: 0;
+}
+.results__content .result__item span {
+  border-left: 2px solid var(--border-color);
+  text-align: end;
+  width: 30%;
+}
+.results__content .result__item p, .results__content .result__item span {
+  padding: 15px;
+}
+.results__content .result__item:nth-child(2n+1) {
+  background-color: #f5f5f6;
+}
+
+/*# sourceMappingURL=style.css.map */
