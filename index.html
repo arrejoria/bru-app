@@ -33,104 +33,113 @@
 
   <body>
     <!-- Add your site or application content here -->
-    <p>This is HTML5 Boilerplate.</p>
-    <input type="text" name="inpTest" id="inpTest" style="padding: 10px;" minlength="4" maxlength="10" value="100.000">
 
-    <main role="main" class="container">
-      <section>
-        <div class="bru__container">
-          <div class="bru__header mb-4">
-            <div class="bru__logo">
-              <a href="#"
-                ><img src="img/bru-logo.svg" alt="" width="200" height="100"
-              /></a>
-            </div>
-            <h3>Simulador Plazo Fijo | Brubank</h3>
-          </div>
-          <div class="bru__body">
-            <fieldset>
-              <div class="bru__fields mb-4">
-                <label for="amount">Monto a Invertir (ARS)</label>
-                <div class="d-flex align-items-start" id="inpAmount">
-                  <span class="amount__icon">$</span>
-                  <input
-                    type="number"
-                    name="amount"
-                    id="amount"
-                    class="amount__inp"
-                    value="100000"
-                  />
-                </div>
-
-                <div
-                  class="bru__minmax d-flex justify-content-between"
-                  id="amountMinMax"
-                >
-                  <small id="amountMin"
-                    >Monto minimo: $1.000<span></span
-                  ></small>
-                  <small id="amountMax"
-                    >Monto maximo: $10.000.000<span></span
-                  ></small>
-                </div>
-              </div>
-
-              <div class="bru__fields" id="inpPeriod">
-                <label for="timePeriod">Periodo de renovación</label>
-                <select name="timePeriod" id="timePeriod">
-                  <option value="">Seleccionar un periodo</option>
-                  <option value="0" selected>1 Mes</option>
-                  <option value="2">3 Meses</option>
-                  <option value="4">1 Año</option>
-                </select>
-                <div
-                  class="bru__minmax d-flex justify-content-between"
-                  id="periodMinMax"
-                >
-                  <small id="periodMin"
-                    >Plazo minimo: <span>30 días</span></small
-                  >
-                  <small id="periodMax"
-                    >Plazo maximo: <span>365 días</span></small
-                  >
-                </div>
-              </div>
-            </fieldset>
-
-            <div class="separator"></div>
-
-            <div class="results__content">
-              <div class="result__item">
-                <p>Monto inicial:</p>
-                <span id="montoInicial"></span>
-              </div>
-              <div class="result__item">
-                <p>Intereses ganados:</p>
-                <span id="interesesGanados"></span>
-              </div>
-              <div class="result__item">
-                <p>Neto a cobrar:</p>
-                <span id="netoACobrar"></span>
-              </div>
-              <div class="result__item">
-                <p>Período de renovación:</p>
-                <span id="periodoRenovacion"></span>
-              </div>
-              <div class="result__item">
-                <p>Tasa Nominal Anual (TNA):</p>
-                <span id="tasaNominalAnual"></span>
-              </div>
-              <div class="result__item">
-                <p>Tasa Efectiva Anual (TEA):</p>
-                <span id="tasaEfectivaAnual"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bru__footer"></div>
+    <main role="main" class="container" id="main">
+      <div class="main__content">
+        <div class="main__description">
+          <h1>Brubank Plazos Fijos: Simulator</h1>
+          <p>Un simulador de plazos fijos para Brubank es una herramienta en línea que permite a los usuarios calcular y simular los rendimientos de los plazos fijos ofrecidos por el banco. El objetivo principal es brindar a los usuarios una estimación de los intereses generados en función de la cantidad de dinero invertido y el plazo seleccionado.</p>
         </div>
-      </section>
+        <div class="main__image">
+          <img src="./img/bru-calculator-img.png" alt="Imagen modelo de la aplicacion" lazyloading>
+        </div>
+      </div>
     </main>
 
+    <section role="">
+      <div class="bru__container">
+        <div class="bru__header mb-4">
+          <div class="bru__logo">
+            <a href="#"
+              ><img src="img/bru-logo.svg" alt="" width="200" height="100"
+            /></a>
+          </div>
+          <h3>Simulador Plazo Fijo | Brubank</h3>
+        </div>
+        <div class="bru__body">
+          <fieldset>
+            <div class="bru__fields mb-4">
+              <label for="amount">Monto a Invertir (ARS)</label>
+              <div class="d-flex align-items-start" id="inpAmount">
+                <span class="amount__icon">$</span>
+                <input
+                  type="text"
+                  name="amount"
+                  id="amount"
+                  minlength="4"
+                  maxlength="10"
+                  class="amount__inp"
+                  value="100.000"
+                />
+              </div>
+
+              <div
+                class="bru__minmax d-flex justify-content-between"
+                id="amountMinMax"
+              >
+                <small id="amountMin"
+                  >Monto minimo: $1.000<span></span
+                ></small>
+                <small id="amountMax"
+                  >Monto maximo: $10.000.000<span></span
+                ></small>
+              </div>
+            </div>
+
+            <div class="bru__fields" id="inpPeriod">
+              <label for="timePeriod">Periodo de renovación</label>
+              <select name="timePeriod" id="timePeriod">
+                <option value="">Seleccionar un periodo</option>
+                <option value="0" selected>1 Mes</option>
+                <option value="2">3 Meses</option>
+                <option value="4">1 Año</option>
+              </select>
+              <div
+                class="bru__minmax d-flex justify-content-between"
+                id="periodMinMax"
+              >
+                <small id="periodMin"
+                  >Plazo minimo: <span>30 días</span></small
+                >
+                <small id="periodMax"
+                  >Plazo maximo: <span>365 días</span></small
+                >
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="separator"></div>
+
+          <div class="results__content">
+            <div class="result__item">
+              <p>Monto inicial:</p>
+              <span id="montoInicial"></span>
+            </div>
+            <div class="result__item">
+              <p>Intereses ganados:</p>
+              <span id="interesesGanados"></span>
+            </div>
+            <div class="result__item">
+              <p>Neto a cobrar:</p>
+              <span id="netoACobrar"></span>
+            </div>
+            <div class="result__item">
+              <p>Período de renovación:</p>
+              <span id="periodoRenovacion"></span>
+            </div>
+            <div class="result__item">
+              <p>Tasa Nominal Anual (TNA):</p>
+              <span id="tasaNominalAnual"></span>
+            </div>
+            <div class="result__item">
+              <p>Tasa Efectiva Anual (TEA):</p>
+              <span id="tasaEfectivaAnual"></span>
+            </div>
+          </div>
+        </div>
+        <div class="bru__footer"></div>
+      </div>
+    </section>
     <div class="screen__loading">
       <span class="animated-words" data-text="brubank">brubank</span>
       <span class="animated-words" data-text="simulator">simulator</span>

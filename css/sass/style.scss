@@ -74,7 +74,7 @@
   --font-family-body: "Inter", sans-serif;
 
   --field-padding: 10px;
-  --load-words: 0%;
+  --width-words: 0%;
   --scren-time: 0s;
 }
 body {
@@ -83,6 +83,36 @@ body {
   box-sizing: border-box;
 }
 
+/**
+ * MAIN SECTION STARTS FROM HERE
+ */
+.main__container{
+
+  
+}
+.main__content {
+
+
+  .main__section {
+
+  }
+
+
+ }
+
+
+
+
+
+ /**
+  * BRU STYLES FOR THE APP STARTS FROM HERE
+  */
+.valid {
+  color: #1e9023;
+}
+.invalid{
+  color: #db2e30;
+}
 .bru__container {
   display: block;
   border: 1px solid var(--border-color);
@@ -172,15 +202,13 @@ body {
 }
 
 .screen__loading {
-  display: block;
-  position: absolute;
-  left: 0;
+  position: fixed;
   top: 0;
-  background-color: #FFF;
-  width: 100vw;
+  left: 0;
+  width: 100%;
   height: 100vh;
+  background-color: white;
   z-index: 9999;
-
 }
 .animated-words {
   position: absolute;
@@ -206,7 +234,7 @@ body {
 .animated-words::before {
   top: 0;
   left: 0;
-  width: 0;
+  width: 20%;
   color: #614ad9;
   overflow: hidden;
   position: absolute;
@@ -214,7 +242,7 @@ body {
   transition: all var(--scren-time);
 }
 .animated-words::before{
-  width: var(--load-words);
+  width: var(--width-words);
 }
 
 .screen-text-animation {
