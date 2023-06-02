@@ -145,6 +145,7 @@ if (screenLoading) {
   setTimeout(() => {
     screenWords[0].classList.add("screen-text-animation");
     screenWords[1].classList.add("screen-text-animation");
+    screenWords[1].classList.add("question-sign");
   }, (time - 1) * 1000);
 
   // Carga screen laoding animation 4 seg posterior a la animacion de screen words

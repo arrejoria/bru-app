@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@500&display=swap");
-
+@font-face {
+  font-family: "Aristotelica DemiBold";
+  src: url("../../assets/fonts/AristotelicaDemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   --text-size-xs: 0.75rem;
   --text-lh-xs: 18px;
@@ -80,41 +85,62 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: #6953df;
   box-sizing: border-box;
 }
 
 /**
  * MAIN SECTION STARTS FROM HERE
  */
-.main__container{
-
-  
+.main__container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-top: 140px;
 }
 .main__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-top: 40px;
 
-
-  .main__section {
-
+  .main__description {
+    padding: 10px;
+    h1, p {
+      color: #fff;
+    }
   }
 
+  .main__image {
+    width: 100%;
+    height: auto;
 
- }
+    img {
+      width: 300px;
+      height: auto;
+      border-radius: 15px;
+      transform: matrix(0.86, 0.52, -0, 1.17, 0, 0);
+      transform: perspective(700px) rotateZ(20deg) skewX(20deg);
 
+      // transform: skewX(-50deg);
+      // transform: skewY(15deg);
+    }
+  }
+}
 
-
-
-
- /**
+/**
   * BRU STYLES FOR THE APP STARTS FROM HERE
   */
 .valid {
   color: #1e9023;
 }
-.invalid{
+.invalid {
   color: #db2e30;
 }
 .bru__container {
   display: block;
+  background-color: #fff;
   border: 1px solid var(--border-color);
   border-radius: 10px;
 
@@ -179,7 +205,7 @@ body {
     align-items: center;
 
     #netoACobrar {
-        color: #1e9023;
+      color: #1e9023;
     }
     p {
       margin: 0;
@@ -191,7 +217,8 @@ body {
       width: 30%;
     }
 
-    p, span {
+    p,
+    span {
       padding: 15px;
     }
   }
@@ -202,6 +229,8 @@ body {
 }
 
 .screen__loading {
+  display: flex;
+  justify-content: start;
   position: fixed;
   top: 0;
   left: 0;
@@ -212,15 +241,14 @@ body {
 }
 .animated-words {
   position: absolute;
-  transform: translate(-50%, -50%);
   margin: 0;
   padding: 0;
-  color: rgb(97, 74, 217, 0.2);
+  color: rgba(104, 83, 223, 0.26);
   font-size: 4em;
-  font-family: 'Poppins';
+  font-family: "Aristotelica DemiBold";
+  // text-align: left;
   overflow: hidden;
-  text-align: center;
-  text-transform: uppercase;
+  // text-transform: capitalize;
 }
 
 .animated-words:first-child {
@@ -231,38 +259,44 @@ body {
   left: 50%;
   top: 60%;
 }
+.animated-words:last-child::after {
+  content: "?";
+  padding-left: 10px;
+  color: #6953df;
+}
+.question-sign {
+  animation: showUp 3s ease-in-out;
+}
+
 .animated-words::before {
   top: 0;
   left: 0;
-  width: 20%;
-  color: #614ad9;
+  width: 0;
+  color: #6953df;
   overflow: hidden;
   position: absolute;
   content: attr(data-text);
   transition: all var(--scren-time);
 }
-.animated-words::before{
+.animated-words::before {
   width: var(--width-words);
 }
 
-.screen-text-animation {
-  // transition: font-size 1s ease-in-out;
-  animation: textBounce 1s ease-out;
-}
-
-.screen-animation{
+.screen-animation {
   animation: screenClose 1s ease-out;
 }
 
-@keyframes textBounce {
+@keyframes showUp {
   0% {
-    font-size: 4em;
+    transform: rotate(0);
+    transform: scale(0, 0);
   }
-  50%{
-    font-size: 5em;
+  70% {
+    transform: scale(0.5, 0);
   }
-  100%{
-    font-size: 4em;
+  100% {
+    transform: rotate(360deg);
+    transform: scale(1, 1);
   }
 }
 

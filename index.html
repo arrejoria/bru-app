@@ -17,7 +17,7 @@
     <link rel="manifest" href="site.webmanifest" />
     <link rel="apple-touch-icon" href="icon.png" />
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" href="bru-favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="./img/BruFavicon.svg" type="image/png" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -34,19 +34,19 @@
   <body>
     <!-- Add your site or application content here -->
 
-    <main role="main" class="container" id="main">
-      <div class="main__content">
-        <div class="main__description">
+    <main role="main" class="main__container" id="main">
+      <div class="main__content row">
+        <div class="main__description col-md-6">
           <h1>Brubank Plazos Fijos: Simulator</h1>
           <p>Un simulador de plazos fijos para Brubank es una herramienta en línea que permite a los usuarios calcular y simular los rendimientos de los plazos fijos ofrecidos por el banco. El objetivo principal es brindar a los usuarios una estimación de los intereses generados en función de la cantidad de dinero invertido y el plazo seleccionado.</p>
         </div>
-        <div class="main__image">
+        <div class="main__image col-md-4">
           <img src="./img/bru-calculator-img.png" alt="Imagen modelo de la aplicacion" lazyloading>
         </div>
       </div>
     </main>
 
-    <section role="">
+    <section role="" class="container" id="bruApp">
       <div class="bru__container">
         <div class="bru__header mb-4">
           <div class="bru__logo">
@@ -141,8 +141,8 @@
       </div>
     </section>
     <div class="screen__loading">
-      <span class="animated-words" data-text="brubank">brubank</span>
-      <span class="animated-words" data-text="simulator">simulator</span>
+      <span class="animated-words" data-text="TuBru">TuBru</span>
+      <span class="animated-words question-sign" data-text="APP">APP</span>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>

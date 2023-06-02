@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@500&display=swap");
+@font-face {
+  font-family: "Aristotelica DemiBold";
+  src: url("../../assets/fonts/AristotelicaDemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   --text-size-xs: 0.75rem;
   --text-lh-xs: 18px;
@@ -79,15 +85,48 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: #6953df;
   box-sizing: border-box;
 }
 
 /**
  * MAIN SECTION STARTS FROM HERE
  */
+.main__container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-top: 140px;
+}
+
+.main__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+.main__content .main__description {
+  padding: 10px;
+}
+.main__content .main__description h1, .main__content .main__description p {
+  color: #fff;
+}
+.main__content .main__image {
+  width: 100%;
+  height: auto;
+}
+.main__content .main__image img {
+  width: 300px;
+  height: auto;
+  border-radius: 15px;
+  transform: matrix(0.86, 0.52, 0, 1.17, 0, 0);
+  transform: perspective(700px) rotateZ(20deg) skewX(20deg);
+}
+
 /**
- * BRU STYLES FOR THE APP STARTS FROM HERE
- */
+  * BRU STYLES FOR THE APP STARTS FROM HERE
+  */
 .valid {
   color: #1e9023;
 }
@@ -98,6 +137,7 @@ body {
 
 .bru__container {
   display: block;
+  background-color: #fff;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   font-family: "Poppins";
@@ -163,7 +203,8 @@ body {
   text-align: end;
   width: 30%;
 }
-.results__content .result__item p, .results__content .result__item span {
+.results__content .result__item p,
+.results__content .result__item span {
   padding: 15px;
 }
 .results__content .result__item:nth-child(2n+1) {
@@ -171,6 +212,8 @@ body {
 }
 
 .screen__loading {
+  display: flex;
+  justify-content: start;
   position: fixed;
   top: 0;
   left: 0;
@@ -182,15 +225,12 @@ body {
 
 .animated-words {
   position: absolute;
-  transform: translate(-50%, -50%);
   margin: 0;
   padding: 0;
-  color: rgba(97, 74, 217, 0.2);
+  color: rgba(104, 83, 223, 0.26);
   font-size: 4em;
-  font-family: "Poppins";
+  font-family: "Aristotelica DemiBold";
   overflow: hidden;
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .animated-words:first-child {
@@ -203,11 +243,21 @@ body {
   top: 60%;
 }
 
+.animated-words:last-child::after {
+  content: "?";
+  padding-left: 10px;
+  color: #6953df;
+}
+
+.question-sign {
+  animation: showUp 3s ease-in-out;
+}
+
 .animated-words::before {
   top: 0;
   left: 0;
-  width: 20%;
-  color: #614ad9;
+  width: 0;
+  color: #6953df;
   overflow: hidden;
   position: absolute;
   content: attr(data-text);
@@ -218,23 +268,21 @@ body {
   width: var(--width-words);
 }
 
-.screen-text-animation {
-  animation: textBounce 1s ease-out;
-}
-
 .screen-animation {
   animation: screenClose 1s ease-out;
 }
 
-@keyframes textBounce {
+@keyframes showUp {
   0% {
-    font-size: 4em;
+    transform: rotate(0);
+    transform: scale(0, 0);
   }
-  50% {
-    font-size: 5em;
+  70% {
+    transform: scale(0.5, 0);
   }
   100% {
-    font-size: 4em;
+    transform: rotate(360deg);
+    transform: scale(1, 1);
   }
 }
 @keyframes screenClose {
