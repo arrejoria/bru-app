@@ -111,11 +111,13 @@ body {
  */
 .main__container {
   width: 100%;
+  padding-top: 100px;
   margin: auto;
 
 }
 .main__content {
   display: flex;
+  gap: 20px;
   border-radius: 20px;
   align-items: center;
 
@@ -168,6 +170,7 @@ body {
 .app__container{
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   background-color: #fff;
   padding: 200px 5% 5% 5%;
   width: 100%;
@@ -311,17 +314,17 @@ body {
 /**
  * SCREEN LOADING STYLES STARTS FROM HERE /////////////////////////////
  */
-// .screen__loading {
-//   display: flex;
-//   justify-content: start;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100vh;
-//   background-color: white;
-//   z-index: 9999;
-// }
+.screen__loading {
+  display: flex;
+  justify-content: start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+}
 .animated-words {
   position: absolute;
   top: 50%;
