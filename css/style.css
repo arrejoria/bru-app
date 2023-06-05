@@ -80,39 +80,55 @@
   --field-padding: 10px;
   --width-words: 0%;
   --scren-time: 0s;
+  --web-color: #6853df;
 }
 
 body {
   padding: 0;
   margin: 0;
-  background-color: #6953df;
-  box-sizing: border-box;
+  background-image: url("../../img/bru-bg-zigzag.svg");
+  background-size: 30px;
+  box-shadow: inset 0px 0px 147px 94px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
 }
 
+/**
+ * NAV SECTION STARTS FROM HERE ////////////////
+ */
 /**
  * MAIN SECTION STARTS FROM HERE
  */
 .main__container {
   width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
-  margin-top: 140px;
+  margin: auto;
 }
 
 .main__content {
   display: flex;
-  justify-content: space-between;
+  border-radius: 20px;
   align-items: center;
-  padding: 20px;
-  margin-top: 40px;
 }
 .main__content .main__description {
-  padding: 10px;
+  background-color: #fff;
+  border-radius: 40px;
 }
-.main__content .main__description h1, .main__content .main__description p {
-  color: #fff;
+.main__content .main__description h1, .main__content .main__description h2 {
+  color: #6853df;
+  font-family: "Poppins";
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+}
+.main__content .main__description h2 {
+  font-size: 40px;
+}
+.main__content .main__description p {
+  font-family: "Poppins";
 }
 .main__content .main__image {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: auto;
 }
@@ -120,30 +136,43 @@ body {
   width: 300px;
   height: auto;
   border-radius: 15px;
-  transform: matrix(0.86, 0.52, 0, 1.17, 0, 0);
-  transform: perspective(700px) rotateZ(20deg) skewX(20deg);
+  transform: rotateZ(20deg) skewX(20deg) translate(0px, 100px);
+}
+@media (max-width: 768px) {
+  .main__content .main__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    transform: none;
+  }
+}
+
+/**
+ * APP SECTION STARTS FROM HERE ////////////////////////
+ */
+.app__container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 200px 5% 5% 5%;
+  width: 100%;
 }
 
 /**
   * BRU STYLES FOR THE APP STARTS FROM HERE
   */
-.valid {
-  color: #1e9023;
-}
-
-.invalid {
-  color: #db2e30;
-}
-
 .bru__container {
   display: block;
+  position: relative;
   background-color: #fff;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 20px;
+  box-shadow: 53px 7px 37px 9px rgba(0, 0, 0, 0.2);
   font-family: "Poppins";
   padding: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: 600px;
+  z-index: 3;
 }
 
 .bru__fields {
@@ -189,100 +218,131 @@ body {
 
 .results__content .result__item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+.results__content .result__item:nth-child(2n+1) {
+  background-color: #f5f5f6;
 }
 .results__content .result__item #netoACobrar {
   color: #1e9023;
 }
 .results__content .result__item p {
+  flex-basis: 50%;
   margin: 0;
 }
 .results__content .result__item span {
+  position: relative;
+  flex-basis: 170px;
   border-left: 2px solid var(--border-color);
   text-align: end;
-  width: 30%;
+  width: 100%;
 }
 .results__content .result__item p,
 .results__content .result__item span {
   padding: 15px;
 }
-.results__content .result__item:nth-child(2n+1) {
-  background-color: #f5f5f6;
-}
 
-.screen__loading {
-  display: flex;
-  justify-content: start;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: white;
-  z-index: 9999;
-}
-
+/**
+ * BRU TOOLS STYLES STARTS FROM HERE //////////////////////////////
+ */
+/**
+ * SCREEN LOADING STYLES STARTS FROM HERE /////////////////////////////
+ */
 .animated-words {
   position: absolute;
+  top: 50%;
+  left: 50%;
   margin: 0;
   padding: 0;
+  transform: translate(-50%, -50%);
+}
+.animated-words .word-1 {
+  display: block;
   color: rgba(104, 83, 223, 0.26);
   font-size: 4em;
   font-family: "Aristotelica DemiBold";
   overflow: hidden;
+  line-height: 1em;
 }
-
-.animated-words:first-child {
-  left: 50%;
-  top: 50%;
-}
-
-.animated-words:last-child {
-  left: 50%;
-  top: 60%;
-}
-
-.animated-words:last-child::after {
-  content: "?";
-  padding-left: 10px;
-  color: #6953df;
-}
-
-.question-sign {
-  animation: showUp 3s ease-in-out;
-}
-
-.animated-words::before {
-  top: 0;
-  left: 0;
+.animated-words .word-1::before {
+  position: absolute;
   width: 0;
   color: #6953df;
   overflow: hidden;
-  position: absolute;
   content: attr(data-text);
   transition: all var(--scren-time);
 }
-
-.animated-words::before {
+.animated-words .word-1::before {
   width: var(--width-words);
+}
+.animated-words .word-2 {
+  display: inline-block;
+  position: relative;
+  color: #6953df;
+  font-size: 4em;
+  font-family: "Aristotelica DemiBold";
+  line-height: 1em;
+  transform: translate(0px, 0px);
+  transition: transform 1s ease;
+  visibility: hidden;
+}
+.animated-words .word-2-visible {
+  visibility: visible;
+}
+.animated-words .word-2-animation {
+  animation: appStrech 1s ease-out;
+}
+.animated-words .question__sign {
+  display: inline-block;
+  color: #6953df;
+  font-family: "Aristotelica DemiBold";
+  font-size: 4rem;
+  line-height: 1em;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+}
+.animated-words .question__sign-animation {
+  animation: questionIn 0.5s ease-in;
+  animation-delay: 0.6s;
+}
+.animated-words .question__sign-visible {
+  visibility: visible;
 }
 
 .screen-animation {
   animation: screenClose 1s ease-out;
 }
 
-@keyframes showUp {
+@keyframes appStrech {
   0% {
-    transform: rotate(0);
-    transform: scale(0, 0);
+    transform: translate(0px, -30px) rotate(-80deg);
+    visibility: visible;
   }
-  70% {
-    transform: scale(0.5, 0);
+  30% {
+    transform: translate(0, 0px) rotate(-40deg);
+  }
+  60% {
+    transform: translate(0, 0) rotate(1deg);
   }
   100% {
-    transform: rotate(360deg);
-    transform: scale(1, 1);
+    transform: translate(0, 0px) rotate(0deg);
+  }
+}
+@keyframes questionIn {
+  0% {
+    transform: translateX(0px) rotate(0);
+  }
+  25% {
+    transform: translateX(10px) rotate(20deg);
+  }
+  75% {
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0px);
   }
 }
 @keyframes screenClose {

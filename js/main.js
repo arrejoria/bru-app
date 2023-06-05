@@ -127,26 +127,32 @@ function handleResults(data) {
 
 document.addEventListener("DOMContentLoaded", initialize);
 
-
 /**
  * Screen Loading Scripts starts here
  */
 
 const screenLoading = document.querySelector(".screen__loading");
-const screenWords = document.querySelectorAll(".animated-words");
+const loadingWord = document.querySelector(".word-1");
+const appWord = document.querySelector(".word-2");
+const questionSign = document.querySelector(".question__sign");
 let time = 4;
 if (screenLoading) {
-  screenWords.forEach((word) => {
-    word.style.setProperty("--scren-time", time + "s");
-    word.style.setProperty("--width-words", "100%");
-  });
+  loadingWord.style.setProperty("--scren-time", time + "s");
+  loadingWord.style.setProperty("--width-words", "100%");
 
   // Carga animacion de screen lette
   setTimeout(() => {
-    screenWords[0].classList.add("screen-text-animation");
-    screenWords[1].classList.add("screen-text-animation");
-    screenWords[1].classList.add("question-sign");
+    loadingWord.classList.add("screen-text-animation");
   }, (time - 1) * 1000);
+
+  setTimeout(()=>{
+    questionSign.classList.add(
+      "question__sign-visible",
+      "question__sign-animation"
+    );
+      appWord.classList.add("word-2-animation", 'word-2-visible');
+    
+  },(time - 3) * 1000)
 
   // Carga screen laoding animation 4 seg posterior a la animacion de screen words
   setTimeout(function () {
@@ -154,7 +160,15 @@ if (screenLoading) {
 
     // Oculta screen laoding 1.5 seg posterior a la animacion
     setTimeout(() => {
+      const mainImg = document.querySelector('.main__image img')
+
+      mainImg.classList.add('main__image-animation')
       screenLoading.style.display = "none";
     }, 1000); // Ajusta el tiempo de espera para que coincida con la duración de la animación (1.5 segundos en este caso)
   }, time * 1000);
+}
+document.addEventListener('DOMContentLoaded', initAnimations())
+function initAnimations(){
+
+
 }
