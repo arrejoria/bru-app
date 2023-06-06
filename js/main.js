@@ -28,7 +28,7 @@ const brubankinteress = {
     tna: [0.92, 0.92, 0.94, 0.97, 1.0],
     tea: [142.7, 135.5, 132.9, 120.9, 100],
   },
-  data: {
+  dataResultResult: {
     montoInicial: {},
     interesesGanados: {},
     netoACobrar: {},
@@ -38,7 +38,7 @@ const brubankinteress = {
   },
 };
 
-const { clasicoPesos, data } = brubankinteress;
+const { clasicoPesos, dataResult } = brubankinteress;
 const localeObj = {
   style: "decimal",
 };
@@ -90,8 +90,7 @@ function handleAmount(e) {
   }
 
   if (monto < 1000) {
-    monto = 1000;
-    num = "1.000";
+    return num
   }
   montoInp.value = num;
   calcularIntereses();
@@ -108,19 +107,19 @@ function calcularIntereses() {
   const intereses = parseFloat(monto) * interes * (plazo / 365);
   const interesesGanados = parseFloat(monto) + intereses;
 
-  data.montoInicial = `$ ${monto.toLocaleString("es-AR")}`;
-  data.interesesGanados = `$ ${interesesGanados.toLocaleString("es-AR")}`;
-  data.netoACobrar = `$ ${intereses.toLocaleString("es-AR", localeObj)}`;
-  data.periodoRenovacion = plazo === 30 ? "1 mes" : `${plazo / 30} meses`;
-  data.tna = `${interes * 100}%`;
-  data.tea = `${clasicoPesos.tea[periodId]}%`;
+  dataResult.montoInicial = `$ ${monto.toLocaleString("es-AR")}`;
+  dataResult.interesesGanados = `$ ${interesesGanados.toLocaleString("es-AR")}`;
+  dataResult.netoACobrar = `$ ${intereses.toLocaleString("es-AR", localeObj)}`;
+  dataResult.periodoRenovacion = plazo === 30 ? "1 mes" : `${plazo / 30} meses`;
+  dataResult.tna = `${interes * 100}%`;
+  dataResult.tea = `${clasicoPesos.tea[periodId]}%`;
 
-  handleResults(data);
+  handleResults(dataResult);
 }
 
-function handleResults(data) {
+function handleResults(dataResult) {
   const resultList = document.querySelectorAll(".result__item");
-  Object.entries(data).forEach(([clave, valor], index) => {
+  Object.entries(dataResult).forEach(([clave, valor], index) => {
     resultList[index].children[1].textContent = valor;
   });
 }
