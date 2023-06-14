@@ -3,6 +3,24 @@ console.log("JS Loaded");
 // My Javascript vanilla code starts here
 
 // Variables
+const plazoData = {
+  clasicoPesos: {
+    dias: [31, 60, 90, 180, 360],
+    tna: [0.92, 0.92, 0.94, 0.97, 1.0],
+    tea: [142.7, 135.5, 132.9, 120.9, 100],
+  },
+  dataResult: {
+    montoInicial: {},
+    interesesGanados: {},
+    netoACobrar: {},
+    periodoRenovacion: {},
+    tna: {},
+    tea: {},
+    fechaInicio: ''
+  },
+  objPlazo: {},
+};
+const { clasicoPesos, dataResult, plazo } = plazoData;
 const localeObj = {
   style: "currency",
   currency: "ARS",
@@ -24,11 +42,14 @@ let monto, periodId;
 // Handling Events
 bruSubmit.addEventListener("click", () => {
   console.log("Calculando intereses ganados");
-  storageResults();
-  showResults();
+
+  verifyInterest();
+  storageResults()
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const fieldValidity = new checkValidity("#validity");
+  verifyInterest();
   storageResults();
 });
 
@@ -38,8 +59,47 @@ montoInp.addEventListener("input", (e) => {
 });
 
 // BruApp functions
+class checkValidity {
+  isValid = false;
+  constructor(el, status) {
+    this.el = document.querySelector(el);
+  }
+
+  thisFunc() {
+    console.log(this);
+  }
+}
+
+function verifyInterest() {
+  monto = parseFloat(montoInp.value.replace(/\./g, ""));
+  periodId = timePeriod.value;
+
+  const interes = clasicoPesos.tna[periodId];
+  const plazo = clasicoPesos.dias[periodId];
+  const intereses = monto * interes * (plazo / 365);
+  const interesesGanados = monto + intereses;
+  const fechaActual = new Date();
+  const fechaFormateada = fechaActual.toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+  dataResult.montoInicial = `${monto.toLocaleString("es-AR", localeObj)}`;
+  dataResult.interesesGanados = `${interesesGanados.toLocaleString(
+    "es-AR",
+    localeObj
+  )}`;
+  dataResult.netoACobrar = `${intereses.toLocaleString("es-AR", localeObj)}`;
+  dataResult.periodoRenovacion = plazo === 31 ? "1 mes" : `${plazo / 30} meses`;
+  dataResult.tna = `${interes * 100}%`;
+  dataResult.tea = `${clasicoPesos.tea[periodId]}%`;
 
 
+  // dataResult.fechaInicio = fechaFormateada;
+
+  setResults(dataResult, resultItems);
+  // console.log(`INTERES: ${interes} / PLAZO: ${plazo} / MONTO: ${monto} / intereses: ${intereses} / intGanados: ${interesesGanados}`)
+}
 function formatAmount(num) {
   removeError(".error-message");
 
@@ -102,97 +162,29 @@ function removeError(elements) {
   bruSubmit.disabled = false;
 }
 
-function storageData(obj) {
-  if (obj) {
-    for (let key in obj) {
-      // console.log("inside stdata bf owp", obj, "key:", key);
-      // console.log("obj prop:", obj);
-      if (obj.hasOwnProperty(key)) {
-        // console.log("inside stdata", obj);
-
-        try {
-          const objString = JSON.stringify(obj[key]); // Almacena el objeto en una variable separada
-          localStorage.setItem(`${key}`, objString);
-        } catch (error) {
-          console.error("Error al almacenar datos en el localStorage:", error);
-        }
-      }
-    }
-  }
+function setResults(obj, element) {
+  Object.entries(obj).forEach(([clave, valor], index) => {
+    
+    return (element[index].children[1].textContent = valor);
+  });
 }
 
 function storageResults() {
-  const plazoData = {
-    clasicoPesos: {
-      dias: [30, 60, 90, 180, 360],
-      tna: [0.59, 0.92, 0.94, 0.97, 1.0],
-      tea: [142.7, 135.5, 132.9, 120.9, 100],
-    },
-  };
+  // console.log(dataResult)
+  //  localStorage.setItem('results', datos)
+  const { montoInicial, interesesGanados, periodoRenovacion, fechaInicio } = dataResult;
 
-  plazoData.plazoResults = storePlazoInfo();
-  storageData(plazoData);
-  showResults()
-}
-
-function storePlazoInfo() {
-  try {
-    const monto = parseFloat(montoInp.value.replace(/\./g, ""));
-    const periodId = timePeriod.value;
-
-    const bruInterests = JSON.parse(localStorage.getItem("clasicoPesos"));
-    if (bruInterests) {
-      console.log(bruInterests);
-      const { dias, tna, tea } = bruInterests;
-      const intereses = monto * tna[periodId] * (dias[periodId] / 365);
-      const fechaActual = new Date();
-      const fechaFormateada = fechaActual.toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
-      const storedInfo = {
-        montoInicial: monto.toLocaleString("es-AR", localeObj),
-        interesesGanados: (monto + intereses).toLocaleString("es-AR", localeObj),
-        netoACobrar: intereses.toLocaleString("es-AR", localeObj),
-        periodoRenovacion: dias[periodId] + ' días',
-        tna: tna[periodId],
-        tea: tea[periodId],
-        // fechaInicio: fechaFormateada,
-      };
-
-      return storedInfo;
-    }
-  } catch (error) {
-    console.error("Error al almacenar información del plazo fijo:", error);
-  }
-
-  return null;
-}
-
-function storagePlazos() {
-  const { montoInicial, interesesGanados, periodoRenovacion, fechaInicio } =
-    plazoData;
-
-  objPlazos = {
+  objPlazo = {
     monto: montoInicial,
     intereses: interesesGanados,
     periodo: periodoRenovacion,
     inicio: fechaInicio,
     finaliza: fechaInicio + 31,
   };
+
+  console.log(objPlazo);
 }
 
-function showResults(){
-  const results = JSON.parse(localStorage.getItem('plazoResults'));
-
-  Object.entries(results).forEach(([clave, valor], index) => {
-    if (Object.hasOwnProperty.call(results, clave)) {
-      return (resultItems[index].children[1].textContent = valor);
-    }
-  });
-}
 /**
  * Screen Loading Scripts starts here
  */

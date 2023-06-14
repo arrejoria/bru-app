@@ -109,26 +109,23 @@ body {
 .main__content {
   display: flex;
   gap: 20px;
-  border-radius: 20px;
   align-items: center;
 }
 .main__content .main__description {
   background-color: #fff;
-  border-radius: 40px;
 }
 .main__content .main__description h1,
-.main__content .main__description h2 {
-  color: #6853df;
+.main__content .main__description p {
   font-family: "Poppins";
+}
+.main__content .main__description h1 {
+  color: #6853df;
   font-size: 60px;
   font-weight: bold;
   margin: 0;
 }
-.main__content .main__description h2 {
-  font-size: 40px;
-}
 .main__content .main__description p {
-  font-family: "Poppins";
+  text-align: justify;
 }
 .main__content .main__image {
   display: flex;
@@ -136,18 +133,15 @@ body {
   width: 100%;
   height: auto;
 }
-.main__content .main__image img {
+.main__content .main__image figure img {
   width: 300px;
   height: auto;
   border-radius: 15px;
   transform: rotateZ(20deg) skewX(20deg) translate(0px, 100px);
 }
 @media (max-width: 768px) {
-  .main__content .main__image img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    transform: none;
+  .main__content .main__image figure img {
+    display: none;
   }
 }
 
@@ -189,13 +183,16 @@ body {
   border: 1px solid #e8e8e8;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  outline: none;
   width: 100%;
 }
 .bru__container .bru__footer .bru__submit button:hover {
   border: 1px solid white;
+  scale: 1.02;
 }
 .bru__container .bru__footer .bru__submit button:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+  scale: 1;
 }
 
 .bru__fields {
@@ -243,7 +240,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
 }
 .results__content .result__item:nth-child(2n+1) {
   background-color: #f5f5f6;
@@ -267,27 +263,29 @@ body {
   padding: 15px;
 }
 
+.error-message {
+  color: #ff0000;
+  font-weight: bold;
+  font-family: "Poppins";
+  margin-left: 10px;
+}
+
 /**
  * BRU TOOLS STYLES STARTS FROM HERE //////////////////////////////
  */
-.bru__tools .bru__tool .st__card {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 300px;
-  border: 5px solid rgba(104, 83, 223, 0.295);
-  border-radius: 28px;
-  background: #fff;
-  box-shadow: 8px 8px 6px #8c8c8c, -1px 1px 20px 1px #FFF;
-  padding: 20px;
-  line-height: 10px;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-table {
   width: 100%;
-  max-width: 300px;
 }
-.bru__tools .bru__tool .st__card p {
-  float: left;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-table thead,
+.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody {
+  border: 1px solid #d4d4d4;
+  padding: 5px;
 }
-.bru__tools .bru__tool .st__card p span {
-  padding-left: 20px;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody tr {
+  height: 50px;
+}
+.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody tr:nth-child(2n+1) {
+  background-color: #f5f5f6;
 }
 
 /**
