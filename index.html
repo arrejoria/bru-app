@@ -132,12 +132,12 @@
             </div>
 
             <div class="bru__fields" id="selectPeriod">
-              <label for="timePeriod">Periodo de renovación</label>
-              <select name="timePeriod" id="timePeriod" required>
+              <label for="selectMeses">Periodo de renovación</label>
+              <select name="selectMeses" id="selectMeses" data-month-id="0" required>
                 <option >Seleccionar un periodo</option>
-                <option value="0" data-placeholder="1 Mes" selected>1 Mes</option>
-                <option value="2" data-placeholder="3 Meses">3 Meses</option>
-                <option value="4" data-placeholder="1 Año">1 Año</option>
+                <option value="1" data-month-id="0" selected>1 Mes</option>
+                <option value="3" data-month-id="2">3 Meses</option>
+                <option value="12" data-month-id="4">1 Año</option>
               </select>
               <div
                 class="bru__minmax d-flex justify-content-between"
@@ -209,15 +209,7 @@
                 <th>Agregar</th>
               </tr>
             </thead>
-              <tbody>
-                <tr>
-                  <td>$107.561,644</td>
-                  <td>$7.561,644</td>
-                  <td>1 Mes</td>
-                  <td>11 JUL 2023</td>
-                  <td>14 AGO 2023</td>
-                  <td><button>agregar</button></td>
-                </tr>
+              <tbody id="plazosLista">
                 <tr>
                   <td>$107.561,644</td>
                   <td>$7.561,644</td>
