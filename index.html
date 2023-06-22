@@ -169,6 +169,12 @@
               </div>
             </div>
           </fieldset>
+          <fieldset>
+            <div class="save__Plazo-confirm d-flex align-items-center justify-content-end mt-4 font-weight-bold">
+              <label class="m-0 mx-2" for="save-confirm">Guardar plazo</label>
+              <input type="checkbox" name="confirm" id="save-confirm">
+            </div>
+          </fieldset>
 
           <div class="separator"></div>
 
@@ -201,35 +207,27 @@
         </div>
         <div class="bru__footer">
           <div id="validity"></div>
-          <div class="save__Plazo-confirm f-flex align-items-center">
-            <label class="mx-2" for="save-confirm">Guardar plazo</label>
-            <input type="checkbox" name="confirm" id="save-confirm">
-          </div>
+          
           <div class="bru__submit">
             <button id="bruSubmit">Calcular Plazo</button>
           </div>
         </div>
       </article>
 
-      <article
-        class="bru__tools col-12 col-md-12 col-lg-6 d-flex flex-column text-center"
-      >
-        <!-- <div>
-        <h1>Sección aun en desarrollo</h1>
-        <p>Proximamente más opciones para el simulador de tu banco favorito!</p>
-       </div> -->
+      <article class="bru__tools col-12 col-md-12 col-lg-6 d-flex flex-column text-center">
         <div class="bru__storage">
-          <h1>Tabla de Intereses Ganados</h1>
+          <h1>Plazos fijos guardados</h1>
 
           <div class="bru__storage-content">
+
             <div class="bru__storage-list">
-              <ul>
+              <ul class="bru__storage-header">
                 <li>Total a cobrar</li>
                 <li>Intereses ganados</li>
                 <li>Periodo</li>
                 <li>Fecha de inicio</li>
                 <li>Finaliza</li>
-                <li>Agregar</li>
+                <li>Botones</li>
               </ul>
             </div>
           </div>
@@ -239,9 +237,9 @@
 
     <footer>
       <div class="container-fluid mt-5">
-        <div class="card bg-white mx-5 p-4">
+        <div class="card bg-white mx-2 p-4">
           <div class="row mb-4">
-            <div class="footer-text col-8">
+            <div class="footer-text">
               <div class="d-flex">
                 <h1
                   class="font-weight-bold mr-2 px-3"

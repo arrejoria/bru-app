@@ -81,12 +81,16 @@ function formatAmount(num) {
 
   return num;
 }
-let contadorID = 0;
 
 function generarID() {
-  contadorID++;
+  let contadorID = 0;
+
+  const plazos = JSON.parse(localStorage.getItem("plazos")) || contadorID;
+  const plazoLength = Object.keys(plazos).length;
+  contadorID = plazoLength;
   return contadorID;
 }
+
 function validateAmount(num) {
   const minAmount = 1000;
   const maxAmount = 10000000;
@@ -299,7 +303,7 @@ function displayPlazo() {
     if (plazoExistente) {
       continue; // Saltar a la siguiente iteración si ya existe
     }
-    
+
     const plazoUl = document.createElement("ul");
     plazoUl.classList.add("bru__plazos");
     plazoUl.setAttribute("data-plazo-id", id);
@@ -314,24 +318,49 @@ function displayPlazo() {
       <button class="del-btn">Eliminar</button></li>`;
 
     plazosLista.append(plazoUl);
-    deletePlazo();
   }
+  handlePlazoBtn();
 }
 
-function deletePlazo() {
-  const delButton = document.querySelectorAll("#del-btn");
-  delButton.forEach((element) => {
-    element.addEventListener("click", (e) => {
-      const plazoUl = e.target.closest(".bru__plazos");
-      const plazoID = plazoUl.getAttribute("data-plazo-id");
-      console.dir(plazoID);
+function handlePlazoBtn() {
+  const plazoUl = document.querySelectorAll(".bru__plazos");
 
-      // if(id == plazoID){
+  plazoUl.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      var plazos = JSON.parse(localStorage.getItem("plazos"));
+      const addBtn = e.target.classList.contains("add-btn");
+      const delBtn = e.target.classList.contains("del-btn");
+      const plazoId = parseInt(el.getAttribute("data-plazo-id"));
+      var total 
 
-      // }
+      plazos.filter(plazo => {
+        if(plazo.id === plazoId ){
+          total = plazo.total
+        }
+      })
+      
+      const indexID = plazos.findIndex(function (plazo) {
+        return plazo.id === plazoId;
+      });
+
+      if (delBtn) {
+        if (indexID >= 0) {
+          plazos.splice(indexID, 1);
+          localStorage.setItem("plazos", JSON.stringify(plazos));
+        }
+        el.remove();
+      }
+
+      if(addBtn){
+        let monto = total.replace('$', '').toLocaleString('es-AR', localeObj)
+        montoInp.value = monto
+        plazoData.clasicoPesos.dias += plazos[0].periodo
+      }
     });
   });
 }
+
+function agregarPlazo() {}
 /**
  * Screen Loading Scripts starts here
  */
@@ -345,7 +374,6 @@ if (screenLoading) {
   loadingWord.style.setProperty("--scren-time", time + "s");
   loadingWord.style.setProperty("--width-words", "100%");
 
-  // Carga animacion de screen lette
   setTimeout(() => {
     loadingWord.classList.add("screen-text-animation");
   }, (time - 1) * 1000);
@@ -358,16 +386,14 @@ if (screenLoading) {
     appWord.classList.add("word-2-animation", "word-2-visible");
   }, (time - 3) * 1000);
 
-  // Carga screen laoding animation 4 seg posterior a la animacion de screen words
   setTimeout(function () {
     screenLoading.classList.add("screen-animation");
 
-    // Oculta screen laoding 1.5 seg posterior a la animacion
     setTimeout(() => {
       const mainImg = document.querySelector(".main__image img");
 
       mainImg.classList.add("main__image-animation");
       screenLoading.style.display = "none";
-    }, 1000); // Ajusta el tiempo de espera para que coincida con la duración de la animación (1.5 segundos en este caso)
+    }, 1000);
   }, time * 1000);
 }
