@@ -273,18 +273,39 @@ body {
 /**
  * BRU TOOLS STYLES STARTS FROM HERE //////////////////////////////
  */
-.bru__tools .bru__storage .bru__storage-content .bru__storage-table {
-  width: 100%;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list {
+  overflow-x: auto;
 }
-.bru__tools .bru__storage .bru__storage-content .bru__storage-table thead,
-.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody {
-  border: 1px solid #d4d4d4;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list * {
+  font-family: "Roboto";
+}
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list ul {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
   padding: 5px;
 }
-.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody tr {
-  height: 50px;
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list ul li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid #d4d4d4;
+  justify-content: center;
+  list-style: none;
 }
-.bru__tools .bru__storage .bru__storage-content .bru__storage-table tbody tr:nth-child(2n+1) {
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list ul li button {
+  border-radius: 5px;
+  outline: none;
+  padding: 5px;
+  margin: 0 5px;
+}
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list .bru__plazos {
+  margin: 0;
+}
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list .bru__plazos li {
+  border: 1px solid #d4d4d4;
+  padding: 10px 5px;
+}
+.bru__tools .bru__storage .bru__storage-content .bru__storage-list .bru__plazos li:nth-child(2n+1) {
   background-color: #f5f5f6;
 }
 
