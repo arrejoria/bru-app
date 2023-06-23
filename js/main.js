@@ -292,23 +292,23 @@ function plazoFechas() {
 function displayPlazo() {
   const plazosLista = document.querySelector(".bru__storage-list");
   const getPlazos = JSON.parse(localStorage.getItem("plazos"));
+  if (getPlazos) {
+    for (let i = 0; i < getPlazos.length; i++) {
+      const { id, total, neto, periodo, fechas } = getPlazos[i];
 
-  for (let i = 0; i < getPlazos.length; i++) {
-    const { id, total, neto, periodo, fechas } = getPlazos[i];
+      // Verificar si el elemento con el ID ya existe
+      const plazoExistente = document.querySelector(
+        `.bru__plazos[data-plazo-id="${id}"]`
+      );
+      if (plazoExistente) {
+        continue; // Saltar a la siguiente iteración si ya existe
+      }
 
-    // Verificar si el elemento con el ID ya existe
-    const plazoExistente = document.querySelector(
-      `.bru__plazos[data-plazo-id="${id}"]`
-    );
-    if (plazoExistente) {
-      continue; // Saltar a la siguiente iteración si ya existe
-    }
+      const plazoUl = document.createElement("ul");
+      plazoUl.classList.add("bru__plazos");
+      plazoUl.setAttribute("data-plazo-id", id);
 
-    const plazoUl = document.createElement("ul");
-    plazoUl.classList.add("bru__plazos");
-    plazoUl.setAttribute("data-plazo-id", id);
-
-    plazoUl.innerHTML = `
+      plazoUl.innerHTML = `
       <li>${total}</li>
       <li>${neto}</li>
       <li>${periodo} Días</li>
@@ -317,9 +317,10 @@ function displayPlazo() {
       <li><button class="add-btn">Agregar</button>
       <button class="del-btn">Eliminar</button></li>`;
 
-    plazosLista.append(plazoUl);
+      plazosLista.append(plazoUl);
+    }
+    handlePlazoBtn();
   }
-  handlePlazoBtn();
 }
 
 function handlePlazoBtn() {
@@ -331,14 +332,14 @@ function handlePlazoBtn() {
       const addBtn = e.target.classList.contains("add-btn");
       const delBtn = e.target.classList.contains("del-btn");
       const plazoId = parseInt(el.getAttribute("data-plazo-id"));
-      var total 
+      var total;
 
-      plazos.filter(plazo => {
-        if(plazo.id === plazoId ){
-          total = plazo.total
+      plazos.filter((plazo) => {
+        if (plazo.id === plazoId) {
+          total = plazo.total;
         }
-      })
-      
+      });
+
       const indexID = plazos.findIndex(function (plazo) {
         return plazo.id === plazoId;
       });
@@ -351,26 +352,26 @@ function handlePlazoBtn() {
         el.remove();
       }
 
-      if(addBtn){
-        let monto = total.replace('$', '').toLocaleString('es-AR', localeObj)
-        montoInp.value = monto
-        plazoData.clasicoPesos.dias += plazos[0].periodo
+      if (addBtn) {
+        let monto = total.replace("$", "").toLocaleString("es-AR", localeObj);
+        montoInp.value = monto;
+        plazoData.clasicoPesos.dias += plazos[0].periodo;
       }
     });
   });
 }
 
 /**
-* Mostrar FAQ Card
-*/
+ * Mostrar FAQ Card
+ */
 
-const faqTitles = document.querySelectorAll('.faq__card-title');
-const faqDesciption = document.querySelectorAll('.faq__card-description');
+const faqTitles = document.querySelectorAll(".faq__card-title");
+const faqDesciption = document.querySelectorAll(".faq__card-description");
 faqTitles.forEach((title, index) => {
-    title.addEventListener('click', (e) => {
-      title.classList.toggle('faq__arrow-rotate')
-      faqDesciption[index].classList.toggle('faq__card-active')
-    })
+  title.addEventListener("click", (e) => {
+    title.classList.toggle("faq__arrow-rotate");
+    faqDesciption[index].classList.toggle("faq__card-active");
+  });
 });
 
 /**
