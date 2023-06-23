@@ -161,6 +161,11 @@ main {
   padding: 200px 5% 5% 5%;
   width: 100%;
 }
+@media (max-width: 770px) {
+  .app__container {
+    padding-top: 20px;
+  }
+}
 
 /**
   * BRU STYLES FOR THE APP STARTS FROM HERE
@@ -309,7 +314,7 @@ main {
 }
 .bru__tools .bru__storage .bru__storage-content .bru__storage-list ul {
   display: grid;
-  grid-template-columns: repeat(6, minmax(180px, 1fr));
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
   padding: 5px;
 }
 .bru__tools .bru__storage .bru__storage-content .bru__storage-list ul li {
@@ -321,9 +326,9 @@ main {
 }
 .bru__tools .bru__storage .bru__storage-content .bru__storage-list ul li button {
   border-radius: 5px;
+  font-size: 14px;
   outline: none;
   padding: 5px;
-  margin: 0 5px;
 }
 .bru__tools .bru__storage .bru__storage-content .bru__storage-list .bru__plazos {
   position: relative;
@@ -365,7 +370,8 @@ main {
   justify-content: center;
   align-items: start;
   flex-wrap: wrap;
-  padding-top: 40px;
+  padding-top: 20px;
+  height: 100%;
   min-height: 200px;
 }
 .faq__container .faq__content .faq__card {
@@ -373,7 +379,6 @@ main {
   width: 100%;
   height: 100%;
   max-width: 500px;
-  max-height: 400px;
 }
 .faq__container .faq__content .faq__card .faq__card-title {
   font-size: 24px;
@@ -412,7 +417,6 @@ main {
   display: none;
   font-family: sans-serif;
   padding: 10px;
-  max-height: 200px;
 }
 .faq__container .faq__content .faq__card .faq__card-active {
   display: flex;
