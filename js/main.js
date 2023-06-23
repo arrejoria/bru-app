@@ -360,7 +360,19 @@ function handlePlazoBtn() {
   });
 }
 
-function agregarPlazo() {}
+/**
+* Mostrar FAQ Card
+*/
+
+const faqTitles = document.querySelectorAll('.faq__card-title');
+const faqDesciption = document.querySelectorAll('.faq__card-description');
+faqTitles.forEach((title, index) => {
+    title.addEventListener('click', (e) => {
+      title.classList.toggle('faq__arrow-rotate')
+      faqDesciption[index].classList.toggle('faq__card-active')
+    })
+});
+
 /**
  * Screen Loading Scripts starts here
  */
