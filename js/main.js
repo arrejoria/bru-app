@@ -1,4 +1,3 @@
-$(document).ready(function () {});
 
 // My Javascript vanilla code starts here
 
@@ -13,24 +12,22 @@ const localeObj = {
 const bruSubmit = document.getElementById("bruSubmit");
 const montoInp = document.querySelector('input[name="amount"]');
 const isSaveChecked = document.querySelector("#save-confirm");
-// const getPeriod = selectMeses?Array.from(selectMeses.children).slice(1).map( (el) => {
-//    return el.dataset.placeholder
-// }) : null
+
 let monto, periodId;
+let mesCantidad;
 
 const plazoData = {
   clasicoPesos: {
     dias: [],
-    tna: [0.92, 0.92, 0.94, 0.97, 1.0],
+    tna: [1.08, 1.18, 1.5],
     tea: [142.7, 135.5, 132.9, 120.9, 100],
   },
 };
+
+const selectMeses = document.querySelector("#selectMeses");
+const resultItems = document.querySelectorAll(".result__item");
+
 // Handling Events
-bruSubmit.addEventListener("click", () => {
-  storageAll();
-  showResults();
-  // loadPlazo();
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   setSelectData();
@@ -41,6 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
 montoInp.addEventListener("input", (e) => {
   let inpValue = e.target.value;
   montoInp.value = formatAmount(inpValue);
+});
+
+selectMeses.addEventListener("change", setSelectData);
+
+bruSubmit.addEventListener("click", () => {
+  storageAll();
+  // showResults();
 });
 
 // BruApp functions
@@ -120,23 +124,18 @@ function removeError(elements) {
   bruSubmit.disabled = false;
 }
 /**
- *
- * Asignar option data attribute al select de meses
+ * Asignar al option del selector meses el data attribute month id
  */
-const selectMeses = document.querySelector('select[name="selectMeses"]');
-const resultItems = document.querySelectorAll(".result__item");
-selectMeses.addEventListener("change", setSelectData());
 
 function setSelectData() {
   const selectedOption = selectMeses.options[selectMeses.selectedIndex];
-  //
   const monthId = selectedOption.getAttribute("data-month-id");
+  mesCantidad = parseInt(selectMeses.value);
+
   selectMeses.setAttribute("data-month-id", monthId);
-  //
 }
 /**
- *
- * Storage Section Starts here
+ * Storage functions Starts here
  */
 
 function storageData(obj) {
@@ -155,28 +154,54 @@ function storageData(obj) {
 }
 
 function storageAll() {
-  plazoData.clasicoPesos.dias = setDias();
+  plazoData.clasicoPesos.dias = setDays();
   plazoData.plazoResults = setPlazoResults();
   storageData(plazoData);
   showResults();
-  setPlazos();
+  setPlazoList();
 
   return plazoData;
 }
 
-function setDias() {
-  try {
-    const mesCantidad = parseInt(selectMeses.value);
-    const fechaInicio = new Date();
-    const fechaFinal = new Date();
-    fechaFinal.setMonth(fechaFinal.getMonth() + mesCantidad);
 
-    const diferenciaMs = fechaFinal.getTime() - fechaInicio.getTime();
-    const diferenciaDias = diferenciaMs / (24 * 60 * 60 * 1000);
-    return diferenciaDias;
-  } catch (error) {
-    console.error("Error al obtener la cantidad de días de los plazos.", error);
+function expirationDate() {
+  let expirationDate = new Date();
+  //Setear expiration date con la suma de mes cantidad
+  expirationDate.setMonth(expirationDate.getMonth() + mesCantidad);
+  //Evaluar condiciones según el día de finalizacion del plazo
+  
+  // obtener fecha y restar 1 día
+  expirationDate.setDate(expirationDate.getDate() - 1);
+  console.log(expirationDate)
+  return expirationDate;
+}
+
+// Verificar si la fecha final cae en un sábado, domingo o es el primer día del mes
+function daysOff() {
+  const date = expirationDate();
+
+  if (date.getDate() === 1) {
+    // Restar 1 día a la fecha inicial
+    if (date.getDay() === 6) date.setDate(date.getDate() - 1);
+    if (date.getDay() === 0) date.setDate(date.getDate() - 2);
+    date.setDate(date.getDate() - 1);
   }
+  while (date.getDay() === 0 || date.getDay() === 6) {
+    return date.setDate(date.getDate() + 1);
+  }
+  return date
+}
+
+function setDays() {
+    const currentDate = new Date();
+    const finalDate = daysOff();
+
+    const diferenciaMilisegundos = finalDate - currentDate;
+    // Calcular la cantidad de días
+    let diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+    // if(diferenciaDias % mesCantidad !== 0)  return diferenciaDias - 1;
+  
+    return diferenciaDias;
 }
 
 function setPlazoResults() {
@@ -184,7 +209,6 @@ function setPlazoResults() {
     const bruInterests = plazoData.clasicoPesos; //JSON.parse(localStorage.getItem("clasicoPesos"));
     const monto = parseFloat(montoInp.value.replace(/\./g, ""));
     const periodId = parseInt(selectMeses.getAttribute("data-month-id"));
-
     //Verificar que en local storage haya informacion del BCRA
     if (bruInterests) {
       const { dias, tna, tea } = bruInterests;
@@ -213,14 +237,16 @@ function showResults() {
   if (results) {
     Object.entries(results).forEach(([clave, valor], index) => {
       if (Object.hasOwnProperty.call(results, clave)) {
-        if (clave == "periodoRenovacion") valor = valor + " días";
+        if (clave == "periodoRenovacion")
+          valor = selectMeses.options[selectMeses.selectedIndex].textContent;
+          console.log(valor)
         return (resultItems[index].children[1].textContent = valor);
       }
     });
   }
 }
 
-function setPlazos() {
+function setPlazoList() {
   const objPlazos = JSON.parse(localStorage.getItem("plazoResults")) || {};
   let plazos = [];
 
@@ -244,6 +270,7 @@ function setPlazos() {
 
       localStorage.setItem("plazos", JSON.stringify(plazos));
 
+      // Agregar plazo a la vista
       displayPlazo();
       return plazos;
     }
@@ -256,8 +283,8 @@ function setPlazos() {
 function plazoFechas() {
   try {
     const fechaActual = new Date();
+    // const plazoDias = ;
     const fechaFinal = new Date();
-    const mesCantidad = parseInt(selectMeses.value);
     const mesActual = fechaActual.getMonth();
 
     fechaFinal.setMonth(mesActual + mesCantidad);
@@ -290,7 +317,7 @@ function plazoFechas() {
  */
 
 function displayPlazo() {
-  const plazosLista = document.querySelector(".bru__storage-list");
+  const listaHeader = document.querySelector(".bru__storage-list");
   const getPlazos = JSON.parse(localStorage.getItem("plazos"));
   if (getPlazos) {
     for (let i = 0; i < getPlazos.length; i++) {
@@ -317,8 +344,9 @@ function displayPlazo() {
       <li><button class="add-btn">Agregar</button>
       <button class="del-btn">Eliminar</button></li>`;
 
-      plazosLista.append(plazoUl);
+      listaHeader.append(plazoUl);
     }
+
     handlePlazoBtn();
   }
 }
@@ -327,23 +355,27 @@ function handlePlazoBtn() {
   const plazoUl = document.querySelectorAll(".bru__plazos");
 
   plazoUl.forEach((el) => {
+    console.log(el);
     el.addEventListener("click", (e) => {
-      var plazos = JSON.parse(localStorage.getItem("plazos"));
+      const plazos = JSON.parse(localStorage.getItem("plazos"));
       const addBtn = e.target.classList.contains("add-btn");
       const delBtn = e.target.classList.contains("del-btn");
       const plazoId = parseInt(el.getAttribute("data-plazo-id"));
-      var total;
+      let total;
 
+      // Filtrar plazos y obtener monto total del plazo por ID
       plazos.filter((plazo) => {
         if (plazo.id === plazoId) {
           total = plazo.total;
         }
       });
 
+      //Indexar plazos por ID para obtener el plazo en un orden correspondiente
       const indexID = plazos.findIndex(function (plazo) {
         return plazo.id === plazoId;
       });
 
+      // Remover plazo fijo del almacenamiento y la vista
       if (delBtn) {
         if (indexID >= 0) {
           plazos.splice(indexID, 1);
@@ -352,6 +384,7 @@ function handlePlazoBtn() {
         el.remove();
       }
 
+      // Sumar monto con intereses al monto de la calculadora
       if (addBtn) {
         let monto = total.replace("$", "").toLocaleString("es-AR", localeObj);
         montoInp.value = monto;
